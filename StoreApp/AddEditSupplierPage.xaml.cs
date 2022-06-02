@@ -32,6 +32,7 @@ namespace StoreApp
         }
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
+            int kol = 0;
             int correctly = 0;
 
             if (TBName.Text == "") MessageBox.Show("Введите имя поставщика!");
@@ -44,7 +45,7 @@ namespace StoreApp
             else if ("+".CompareTo(Convert.ToString(TBPhone.Text[0])) == 0)//проверка на правильность введенного н.телефона
             {
                 TBPhone.Text = TBPhone.Text.Trim(' ');
-                int kol = 0;
+                kol = 0;
                 for (int i = 1; i < TBPhone.Text.Length; i++)
                 {
                     if (Convert.ToChar(TBPhone.Text[i]) >= 48 && 57 >= Convert.ToChar(TBPhone.Text[i]))
@@ -61,25 +62,30 @@ namespace StoreApp
             else
             {
                 TBPhone.Text = TBPhone.Text.Trim(' ');
-                int kol = 0;
-                for (int i = 0; i < TBPhone.Text.Length; i++)
+                if (TBPhone.Text.Length == 11)
                 {
-                    if (Convert.ToChar(TBPhone.Text[i]) >= 48 && 57 >= Convert.ToChar(TBPhone.Text[i]))
+                    kol = 0;
+                    for (int i = 0; i < TBPhone.Text.Length; i++)
                     {
-                        kol++;
+                        if (Convert.ToChar(TBPhone.Text[i]) >= 48 && 57 >= Convert.ToChar(TBPhone.Text[i]))
+                        {
+                            kol++;
+                        }
                     }
+                    if (kol != 11)
+                    {
+                        MessageBox.Show("Некорректно введен номер телефона!");
+                    }
+                    else correctly++;
                 }
-                if (kol != 11)
-                {
-                    MessageBox.Show("Некорректно введен номер телефона!");
-                }
-                else correctly++;
+                else MessageBox.Show("Некорректно введен номер телефона!");
             }
 
-            
+
             if (TBTIN.Text == "") MessageBox.Show("Введите ИНН!");
             else
-            {int kol = 0;
+            {
+                kol = 0;
                 for (int i = 0; i < TBTIN.Text.Length; i++)
                 {
                     if (Convert.ToChar(TBTIN.Text[i]) >= 48 && 57 >= Convert.ToChar(TBTIN.Text[i]))
@@ -97,7 +103,7 @@ namespace StoreApp
             if (TBSA.Text == "") MessageBox.Show("Введите номер расчетного счета!");
             else
             {
-            int kol = 0;
+                kol = 0;
                 for (int i = 0; i < TBSA.Text.Length; i++)
                 {
                     if (Convert.ToChar(TBSA.Text[i]) >= 48 && 57 >= Convert.ToChar(TBSA.Text[i]))
